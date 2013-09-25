@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coinforest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <!-- BEGIN FOXYCART FILES -->
+    <link rel="stylesheet" href="//cdn.foxycart.com/static/scripts/colorbox/1.3.23/style1_fc/colorbox.css?ver=1" type="text/css" media="screen" charset="utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//cdn.foxycart.com/cf-hive-test/foxycart.colorbox.js?ver=2" type="text/javascript" charset="utf-8"></script>
+    <!-- END FOXYCART FILES -->
+
+    <script type="text/javascript">
+        'use strict';
+
+        var cf_server = 'http://6a8343f1ef.test-url.ws/';
+        var cf_api_key = 'BaB7tda2HEmySMdDmvX671blZU59URWqRsravw631jvNWChdY59Z1egQZbTN';
+        var cf_endpoint = 'https://cf-hive-test.foxycart.com/api';
+
+        var bitcoin = bitcoin || {
+            getClientInfo: function (callback) {
+                var info = {
+                    firstname: 'Homer',
+                    lastname:  'Simpson',
+                    email:     'homer@fake.com',
+                    address:   'poqjer23rfc234laq',
+                    street:    'next to Flanders',
+                    zipcode:   '12233',
+                    city:      'Springfield',
+                    country:   'USA'
+                };
+
+                return callback(info);
+            },
+
+            sendCoins: function (hash, amount, callback) {
+                return callback(true, hash);
+            }
+        };
+
+        var call_api = function(){
+
+            var d = 'api_token='+cf_api_key;
+            d = d + "&api_action=transaction_list&";
+
+            $.ajax({
+                type: "POST",
+                url: cf_endpoint,
+                data: d,
+                success: function(e){
+                    alert('success');
+                    console.log(e);
+                    $('#categories').html(e);
+
+                },
+                error: function(e){
+                    alert('error');
+                    console.log(e);
+                }
+            });
+        }
+
+        var call_html = function(){
+            $.ajax({
+                type: "GET",
+                url: cf_server,
+                dataType: 'html',
+                success: function(e){
+                    var div = $(e);
+
+                    console.log(div.find('#deal-box')[0]);
+                    $('#product_pic').html(div.find('#deal-box')[0].innerHTML);
+                    //$('#product_desc').html(www.('.span7 copy:first').html());
+                },
+                error: function(e){
+                    alert('error');
+                    console.log(e);
+                }
+            });
+        }
+    </script>
+
+
+</head>
+<body onLoad='call_html();'>
+<div class="container">
+    <div class="page-header">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="./" class="brand">
+                            <img src="./img/coinforest-logo-35.png" alt="Coin Forest" title="Coin Forest" height="35">
+                        </a>
+                    </li>
+
+                    <li class="active"><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="page">
+    <div class="panel panel-default">
+        <div id="product_pic" class="panel-body">
+            <p id="categories">Here goes the picture</p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div id="product_time" class="panel-body">
+            Here goes the time
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div id="product_desc" class="panel-body">
+
+            <a href="https://cf-hive-test.foxycart.com/cart?name=Cool%20Example&price=10&color=red&code=sku123">Add a red Cool Example</a>
+            <!-- form example -->
+            <form action="https://cf-hive-test.foxycart.com/cart" method="post" accept-charset="utf-8">
+                <input type="hidden" name="name" value="Cool Example" />
+                <input type="hidden" name="price" value="10" />
+                <input type="hidden" name="code" value="sku123" />
+                <label class="label_left">Size</label>
+                <select name="size">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <input type="submit" name="Add a Cool Example" value="Add a Cool Example" class="submit" />
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div id="product_buy" class="panel-body">
+            <form action="https://coinforest.foxycart.com/cart" method="post" accept-charset="utf-8" role="form">
+                <!-- update this -->
+                <input type="hidden" name="name" value="Bitcoin Paper Wallets Kit">
+                <input type="hidden" name="cart" value="checkout">
+                <input type="hidden" name="price" value="12.5">
+                <input type="hidden" name="code" value="cf-deal4">
+                <input type="hidden" name="empty" value="true">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" min="1" max="10" name="quantity" value="2"
+                           class="form-control"
+                           id="quantity">
+                </div>
+                <div  class="btn-toolbar row-fluid text-center">
+                    <div id="buy-button">
+                    </div>
+                </div>
+                <button type="submit" id="buy-now" class="btn btn-large btn-solid btn-cta span8"><h5>Buy Now With Bitcoin</h5></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
